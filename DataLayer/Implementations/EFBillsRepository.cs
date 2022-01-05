@@ -1,11 +1,12 @@
-﻿using BusinessLayer.Interfaces;
+﻿using DataLayer.Interfaces;
 using DataLayer;
 using DataLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
-namespace BusinessLayer.Implementations
+namespace DataLayer.Implementations
 {
     public class EFBillsRepository : IBillsRepository
     {
@@ -23,7 +24,7 @@ namespace BusinessLayer.Implementations
 
         public IEnumerable<Bill> GetAllBills()
         {
-            return _context.Bills;
+            return _context.Bills.ToList();
         }
 
         public Bill GetBillById(long billId)

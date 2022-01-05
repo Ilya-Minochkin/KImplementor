@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusinessLayer.Interfaces
+namespace DataLayer.Interfaces
 {
     public interface IBillsRepository
     {
