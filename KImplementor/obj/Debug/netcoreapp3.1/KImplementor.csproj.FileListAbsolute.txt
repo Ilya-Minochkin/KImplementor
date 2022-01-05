@@ -6,18 +6,9 @@ F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\KIm
 F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\KImplementor.runtimeconfig.dev.json
 F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\KImplementor.dll
 F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\KImplementor.pdb
-F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
-F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\EntityFramework.dll
 F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\nunit.framework.dll
-F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\System.CodeDom.dll
 F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
-F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
 F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
-F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
-F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
-F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
-F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 F:\Учеба\Диплом\KImplementor\KImplementor\obj\Debug\netcoreapp3.1\KImplementor.csproj.AssemblyReference.cache
 F:\Учеба\Диплом\KImplementor\KImplementor\obj\Debug\netcoreapp3.1\KImplementor.GeneratedMSBuildEditorConfig.editorconfig
@@ -74,3 +65,5 @@ F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\Dat
 F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\DataLayer.pdb
 F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\Humanizer.dll
 F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\BusinessLayer.dll
+F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\BusinessLayer.pdb

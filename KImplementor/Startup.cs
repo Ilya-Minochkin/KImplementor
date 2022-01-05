@@ -1,8 +1,11 @@
 using DataLayer;
+using DataLayer.Implementations;
+using DataLayer.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,9 +31,15 @@ namespace KImplementor
         {
             var connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddControllers();
-            services.AddDbContext<EFDBContext>();
+            services.AddDbContext<EFDBContext>(options => options.UseSqlServer(connection));
 
+            services.AddTransient<IOrganizationsRepository, EFOrganizationsRepository>();
+            services.AddTransient<IBillsRepository, EFBillsRepository>();
 
+            services.AddScoped<BusinessLayer.DataManager>();
+            services.AddScoped<BusinessLayer.Services.OrganizationService>();
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
