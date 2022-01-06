@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Models;
+﻿using BusinessLayer;
+using BusinessLayer.Models;
 using BusinessLayer.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ namespace KImplementor.Controllers
     public class OrganizationsController : Controller
     {
         private readonly OrganizationService _organizationService;
-        public OrganizationsController(OrganizationService organizationService)
+        public OrganizationsController(ServiceManager serviceManager)
         {
-            _organizationService = organizationService;
+            _organizationService = serviceManager.OrganizationService;
         }
 
         [HttpGet]

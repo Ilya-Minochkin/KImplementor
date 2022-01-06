@@ -1,22 +1,21 @@
 ﻿using DataLayer.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace BusinessLayer
+namespace DataLayer
 {
     public class DataManager
     {
-        private readonly IBillsRepository _billsRepository;
-        private readonly IOrganizationsRepository _organizationsRepository;
+        public IBillsRepository BillsRepository { get; }
+        public IOrganizationsRepository OrganizationsRepository { get; }
+        public IUsersRepository UsersRepository { get; }
 
-        public DataManager(IBillsRepository billsRepository, IOrganizationsRepository organizationsRepository)
+        public DataManager(IBillsRepository billsRepository, 
+            IOrganizationsRepository organizationsRepository,
+            IUsersRepository usersRepository)
         {
-            _billsRepository = billsRepository;
-            _organizationsRepository = organizationsRepository;
+            BillsRepository = billsRepository;
+            OrganizationsRepository = organizationsRepository;
+            UsersRepository = usersRepository;
         }
 
-        public IBillsRepository BillsRepository => _billsRepository;
-        public IOrganizationsRepository OrganizationsRepository => _organizationsRepository;
     }
 }

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataLayer.Entities;
+﻿using DataLayer.Entities;
 using DataLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataLayer.Implementations
 {
@@ -15,6 +14,10 @@ namespace DataLayer.Implementations
         public EFOrganizationsRepository(EFDBContext context)
         {
             _context = context;
+        }
+        ~EFOrganizationsRepository()
+        {
+            Console.WriteLine("Delete");
         }
         public void DeleteOrganization(Organization organization)
         {

@@ -1,9 +1,6 @@
-﻿using DataLayer.Interfaces;
-using DataLayer;
-using DataLayer.Entities;
-using System;
+﻿using DataLayer.Entities;
+using DataLayer.Interfaces;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
 namespace DataLayer.Implementations
