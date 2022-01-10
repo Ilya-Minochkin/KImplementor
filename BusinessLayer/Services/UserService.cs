@@ -3,10 +3,6 @@ using BusinessLayer.Utils;
 using DataLayer;
 using DataLayer.Entities;
 using DataLayer.Interfaces;
-using Org.BouncyCastle.Crypto.Digests;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BusinessLayer.Services
 {
@@ -18,23 +14,23 @@ namespace BusinessLayer.Services
             _usersRepository = dataManager.UsersRepository;
         }
 
-        public UserModel GetUserModelById (long id)
+        public UserModel GetUserModelById(long id)
         {
             var userDb = _usersRepository.GetUserById(id);
             return ToModel(userDb);
         }
 
-        public void SaveUserModel (UserModel userModel)
+        public void SaveUserModel(UserModel userModel)
         {
             var hasher = new Hasher();
             var password = userModel.User.Password;
-            
+
 
             userModel.User.Password = hasher.GetHashedStringSha3(password);
             _usersRepository.SaveUser(userModel.User);
         }
 
-        public UserModel GetUserModelByEmail (string email)
+        public UserModel GetUserModelByEmail(string email)
         {
             var userDb = _usersRepository.GetUserByEmail(email);
             return ToModel(userDb);
@@ -44,6 +40,6 @@ namespace BusinessLayer.Services
             return new UserModel(user);
         }
 
-        
+
     }
 }

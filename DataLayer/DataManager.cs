@@ -8,7 +8,7 @@ namespace DataLayer
         public IOrganizationsRepository OrganizationsRepository { get; }
         public IUsersRepository UsersRepository { get; }
 
-        public DataManager(IBillsRepository billsRepository = default(IBillsRepository), 
+        public DataManager(IBillsRepository billsRepository = default(IBillsRepository),
             IOrganizationsRepository organizationsRepository = default(IOrganizationsRepository),
             IUsersRepository usersRepository = default(IUsersRepository))
         {

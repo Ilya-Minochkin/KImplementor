@@ -1,12 +1,10 @@
 ﻿using DataLayer.Entities;
+using DataLayer.Exceptions;
 using DataLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq;
-using DataLayer.Exceptions;
+using System.Threading.Tasks;
 
 namespace DataLayer.Implementations
 {

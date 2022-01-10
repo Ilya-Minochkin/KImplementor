@@ -1,15 +1,15 @@
 using DataLayer;
 using DataLayer.Implementations;
 using DataLayer.Interfaces;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
+using KImplementor.Authentification;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using KImplementor.Authentification;
+using Microsoft.IdentityModel.Tokens;
 
 namespace KImplementor
 {

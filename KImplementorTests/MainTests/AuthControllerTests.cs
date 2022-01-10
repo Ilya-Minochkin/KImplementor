@@ -8,9 +8,7 @@ using KImplementor.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace KImplementorTests.MainTests
 {
@@ -36,7 +34,7 @@ namespace KImplementorTests.MainTests
 
             Assert.IsInstanceOf(typeof(LoginResponse), loginResponse);
         }
-        
+
         [Test]
         public void SimpleLoginTestFailed()
         {
