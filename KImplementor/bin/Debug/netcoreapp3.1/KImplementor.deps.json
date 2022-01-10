@@ -31,6 +31,7 @@
     ".NETCoreApp,Version=v3.1": {
       "KImplementor/1.0.0": {
         "dependencies": {
+          "BouncyCastle.NetCore": "1.8.10",
           "BusinessLayer": "1.0.0",
           "DataLayer": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.22",
@@ -313,6 +314,17 @@
         },
         "compile": {
           "KImplementor.dll": {}
+        }
+      },
+      "BouncyCastle.NetCore/1.8.10": {
+        "runtime": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
+            "assemblyVersion": "1.8.8.0",
+            "fileVersion": "1.8.20265.1"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
         }
       },
       "Humanizer.Core/2.8.26": {
@@ -1464,6 +1476,7 @@
       },
       "BusinessLayer/1.0.0": {
         "dependencies": {
+          "BouncyCastle.NetCore": "1.8.10",
           "DataLayer": "1.0.0"
         },
         "runtime": {
@@ -3112,6 +3125,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "BouncyCastle.NetCore/1.8.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Uqd1mSV+ewDNuX4G0lXds4TM2DYyFTnCUZAjZLxmxglKSCbTZe2R+TQV/u369J/bXaNZ6s/1sedCtl/5u+66iQ==",
+      "path": "bouncycastle.netcore/1.8.10",
+      "hashPath": "bouncycastle.netcore.1.8.10.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",

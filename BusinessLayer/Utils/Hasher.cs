@@ -1,11 +1,13 @@
 ﻿using Org.BouncyCastle.Crypto.Digests;
+using System.Runtime.CompilerServices;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
+[assembly: InternalsVisibleTo("KImplementorTests")]
 namespace BusinessLayer.Utils
 {
-    class Hasher
+    internal class Hasher
     {
         public string GetHashedStringSha3(string source)
         {

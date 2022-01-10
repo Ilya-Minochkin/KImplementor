@@ -3,6 +3,7 @@ using BusinessLayer.Models;
 using BusinessLayer.Services;
 using DataLayer.Exceptions;
 using KImplementor.Authentification;
+using KImplementor.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -23,64 +24,27 @@ namespace KImplementor.Controllers
         //    new UserModel { Login="qwerty@gmail.com", Password="55555", Role = "user" }
         //};
         private readonly UserService _userService;
+        private readonly AuthService _authService;
         public AuthController(ServiceManager serviceManager)
         {
             _userService = serviceManager.UserService;
+            _authService = serviceManager.AuthService;
         }
 
-        [HttpPost("/token")]
-        public IActionResult Token(string username, string password)
+        [HttpPost("/login")]
+        public IActionResult Login(string username, string password)
         {
-            var identity = GetIdentity(username, password);
+            var identity = _authService.GetIdentity(username, password);
             if (identity == null)
             {
                 return BadRequest(new { errorText = "Invalid username or password." });
             }
 
-            var now = DateTime.UtcNow;
-            // создаем JWT-токен
-            var jwt = new JwtSecurityToken(
-                    issuer: AuthOptions.ISSUER,
-                    audience: AuthOptions.AUDIENCE,
-                    notBefore: now,
-                    claims: identity.Claims,
-                    expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
-                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-
-            var response = new
-            {
-                access_token = encodedJwt,
-                username = identity.Name
-            };
+            var response = new LoginResponse(_authService.GetToken(identity), username);
 
             return Json(response);
         }
 
-        private ClaimsIdentity GetIdentity(string email, string password)
-        {
-            try
-            {
-                UserModel userModel = _userService.GetUserModelByEmail(email);
-                if (userModel.User.Password == password)
-                {
-                    var claims = new List<Claim>
-                    {
-                        new Claim(ClaimsIdentity.DefaultNameClaimType, userModel.User.Email),
-                        new Claim(ClaimsIdentity.DefaultRoleClaimType, userModel.User.Roles.First().ToString())
-                    };
-                    ClaimsIdentity claimsIdentity =
-                    new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                        ClaimsIdentity.DefaultRoleClaimType);
-                    return claimsIdentity;
-                }
-
-            }
-            catch (UserNotFoundException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return null;
-        }
+        
     }
 }

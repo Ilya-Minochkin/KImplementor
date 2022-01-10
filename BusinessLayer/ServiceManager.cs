@@ -8,6 +8,7 @@ namespace BusinessLayer
         private readonly DataManager _dataManager;
         public OrganizationService OrganizationService { get; }
         public UserService UserService { get; }
+        public AuthService AuthService { get; }
 
 
         public ServiceManager(DataManager dataManager)
@@ -15,6 +16,7 @@ namespace BusinessLayer
             _dataManager = dataManager;
             OrganizationService = new OrganizationService(_dataManager);
             UserService = new UserService(_dataManager);
+            AuthService = new AuthService(_dataManager, UserService);
         }
     }
 }

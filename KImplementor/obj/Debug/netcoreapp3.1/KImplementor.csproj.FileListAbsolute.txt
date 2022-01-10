@@ -68,3 +68,4 @@ F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\Mic
 F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\BusinessLayer.dll
 F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\BusinessLayer.pdb
 F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+F:\Учеба\Диплом\KImplementor\KImplementor\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
