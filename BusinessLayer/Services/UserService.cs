@@ -2,7 +2,9 @@
 using BusinessLayer.Utils;
 using DataLayer;
 using DataLayer.Entities;
+using DataLayer.Exceptions;
 using DataLayer.Interfaces;
+using System;
 
 namespace BusinessLayer.Services
 {
@@ -23,11 +25,17 @@ namespace BusinessLayer.Services
         public void SaveUserModel(UserModel userModel)
         {
             var hasher = new Hasher();
-            var password = userModel.User.Password;
 
+            var userWithHashedPassword = new User()
+            {
+                Email = userModel.User.Email,
+                FullName = userModel.User.FullName,
+                Password = hasher.GetHashedStringSha3(userModel.User.Password),
+                ShortName = userModel.User.ShortName,
+                Roles = userModel.User.Roles
+            };
 
-            userModel.User.Password = hasher.GetHashedStringSha3(password);
-            _usersRepository.SaveUser(userModel.User);
+            _usersRepository.SaveUser(userWithHashedPassword);
         }
 
         public UserModel GetUserModelByEmail(string email)

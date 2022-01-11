@@ -2,8 +2,10 @@
 using BusinessLayer.Utils;
 using DataLayer;
 using DataLayer.Entities;
+using DataLayer.Exceptions;
 using DataLayer.Interfaces;
 using Moq;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,12 @@ namespace KImplementorTests.BusinessLayerTests
         public UserServiceTests()
         {
             InitData();
+        }
+        [Test]
+        public void ShouldThrowExceptionIfUserNotExists()
+        {
+            var ex = Assert.Throws<UserNotFoundException>(() => service.GetUserModelByEmail("wrongEmail@w.com"));
+            Assert.That(ex.Message, Is.EqualTo("1"));
         }
 
         private void InitData()

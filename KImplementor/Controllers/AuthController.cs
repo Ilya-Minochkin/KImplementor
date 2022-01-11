@@ -1,10 +1,14 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Models;
 using BusinessLayer.Services;
+using DataLayer.Exceptions;
 using KImplementor.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KImplementor.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class AuthController : Controller
     {
         // тестовые данные вместо использования базы данных
@@ -21,18 +25,43 @@ namespace KImplementor.Controllers
             _authService = serviceManager.AuthService;
         }
 
-        [HttpPost("/login")]
+        [HttpPost("login")]
         public IActionResult Login(string username, string password)
         {
-            var identity = _authService.GetIdentity(username, password);
-            if (identity == null)
+            try
             {
-                return BadRequest(new { errorText = "Invalid username or password." });
+                var identity = _authService.GetIdentity(username, password);
+                var response = new LoginResponse(_authService.GetToken(identity), username);
+
+                return Json(response);
+            }
+            catch (UserNotFoundException)
+            {
+
+                return BadRequest(new { errorText = "Invalid email" });
+            }
+            catch (WrongPasswordException)
+            {
+                return BadRequest(new { errorText = "Invalid password." });
+            }
+        }
+        [HttpPost("signup")]
+        public IActionResult SignUp(UserModel userModel)
+        {
+            if (_userService.GetUserModelByEmail(userModel.User.Email).User != null)
+            {
+                return BadRequest(new { errorText = "This user is already exists" });
             }
 
-            var response = new LoginResponse(_authService.GetToken(identity), username);
+            _userService.SaveUserModel(userModel);
 
-            return Json(response);
+            return Ok();
+        }
+
+        [HttpGet]
+        public IActionResult Test()
+        {
+            return new JsonResult(new { field = 1, fieldd = "11" });
         }
 
 

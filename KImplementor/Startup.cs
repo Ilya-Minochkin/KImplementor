@@ -31,6 +31,7 @@ namespace KImplementor
 
             services.AddTransient<IOrganizationsRepository, EFOrganizationsRepository>();
             services.AddTransient<IBillsRepository, EFBillsRepository>();
+            services.AddTransient<IUsersRepository, EFUsersRepository>();
 
             services.AddScoped<DataManager>();
             services.AddScoped<BusinessLayer.ServiceManager>();

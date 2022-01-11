@@ -12,6 +12,15 @@ namespace DataLayer
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<User>()
+                .HasMany(p => p.Roles)
+                .WithMany(p => p.Users)
+                .UsingEntity(t => t.ToTable("RoleUser"));
+        }
+
         public EFDBContext(DbContextOptions<EFDBContext> options) : base(options) { }
     }
 }

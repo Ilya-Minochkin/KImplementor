@@ -8,5 +8,10 @@ namespace DataLayer.Entities
         public long Id { get; set; }
         public List<User> Users { get; set; }
         public Roles Name { get; set; }
+
+        public Role()
+        {
+            Users = new List<User>();
+        }
     }
 }

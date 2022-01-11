@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Utils;
 using DataLayer;
 using DataLayer.Entities;
 using DataLayer.Enums;
@@ -19,6 +20,7 @@ namespace KImplementorTests.MainTests
         private Mock<IUsersRepository> mock;
         private User testUser;
         private AuthController controller;
+        private Hasher hasher;
 
         public AuthControllerTests()
         {
@@ -53,11 +55,40 @@ namespace KImplementorTests.MainTests
 
             Assert.AreEqual(email, loginResponse.Email);
         }
+        [Test]
+        public void SimpleRegisterSuccessfullTest()
+        {
+            var newUser = new User()
+            {
+                Id = 9,
+                Email = "NewEmail@mail.com",
+                FullName = "NewTest",
+                ShortName = "NT",
+                Password = hasher.GetHashedStringSha3("NewTest")
+            };
+            var newUserUnhashed = new User()
+            {
+                Id = 9,
+                Email = "NewEmail@mail.com",
+                FullName = "NewTest",
+                ShortName = "NT",
+                Password = "NewTest"
+            };
+
+            controller.SignUp(new BusinessLayer.Models.UserModel(newUserUnhashed));
+            mock.Setup(r => r.GetUserByEmail(newUser.Email)).Returns(newUser);
+            var result = controller.Login(newUserUnhashed.Email, newUserUnhashed.Password);
+            var jsonResult = result as JsonResult;
+            var loginResponse = jsonResult.Value;
+
+            Assert.IsInstanceOf(typeof(LoginResponse), loginResponse);
+        }
 
         private void InitData()
         {
             email = "Test@test.com";
             password = "test";
+            hasher = new Hasher();
 
             mock = new Mock<IUsersRepository>();
 

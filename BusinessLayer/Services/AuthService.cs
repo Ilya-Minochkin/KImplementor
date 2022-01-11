@@ -26,32 +26,27 @@ namespace BusinessLayer.Services
         {
             var hasher = new Hasher();
             var hashedPassword = hasher.GetHashedStringSha3(password);
-            try
+
+            UserModel userModel = _userService.GetUserModelByEmail(email);
+            if (userModel.User.Password == hashedPassword)
             {
-                UserModel userModel = _userService.GetUserModelByEmail(email);
-                if (userModel.User.Password == hashedPassword)
-                {
-                    var claims = new List<Claim>
+                var claims = new List<Claim>
                     {
                         new Claim(ClaimsIdentity.DefaultNameClaimType, userModel.User.Email),
                     };
-                    foreach (var role in userModel.User.Roles)
-                    {
-                        claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, role.ToString()));
-                    }
-                    ClaimsIdentity claimsIdentity =
-                    new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                        ClaimsIdentity.DefaultRoleClaimType);
-                    return claimsIdentity;
+                foreach (var role in userModel.User.Roles)
+                {
+                    claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, role.ToString()));
                 }
-
+                ClaimsIdentity claimsIdentity =
+                new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+                    ClaimsIdentity.DefaultRoleClaimType);
+                return claimsIdentity;
             }
-            catch (UserNotFoundException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return null;
+            throw new WrongPasswordException("Password is not correct!");
         }
+
+            
 
         public string GetToken(ClaimsIdentity identity)
         {
