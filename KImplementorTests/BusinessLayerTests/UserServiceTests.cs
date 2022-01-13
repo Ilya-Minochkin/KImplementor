@@ -16,6 +16,7 @@ namespace KImplementorTests.BusinessLayerTests
     public class UserServiceTests
     {
         private string email;
+        private string wrongEmail;
         private Mock<IUsersRepository> mock;
         private UserService service;
 
@@ -26,13 +27,14 @@ namespace KImplementorTests.BusinessLayerTests
         [Test]
         public void ShouldThrowExceptionIfUserNotExists()
         {
-            var ex = Assert.Throws<UserNotFoundException>(() => service.GetUserModelByEmail("wrongEmail@w.com"));
-            Assert.That(ex.Message, Is.EqualTo("1"));
+            var ex = Assert.Throws<UserNotFoundException>(() => service.GetUserModelByEmail(wrongEmail));
+            Assert.That(ex.Message, Is.EqualTo("Exception of type 'DataLayer.Exceptions.UserNotFoundException' was thrown."));
         }
 
         private void InitData()
         {
             email = "Test1@test";
+            wrongEmail = "wrongEmail@w.com";
             mock = new Mock<IUsersRepository>();
             mock.Setup(repo => repo.GetAllUsers())
                 .Returns(GetPreparedUsers());
@@ -40,7 +42,8 @@ namespace KImplementorTests.BusinessLayerTests
                 .Returns(GetPreparedUsers()
                     .Where(user => user.Email == email)
                     .FirstOrDefault);
-
+            mock.Setup(repo => repo.GetUserByEmail(wrongEmail))
+                .Throws(new UserNotFoundException());
             service = new UserService(new DataManager(usersRepository: mock.Object));
         }
 

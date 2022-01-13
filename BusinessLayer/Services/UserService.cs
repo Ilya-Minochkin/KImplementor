@@ -43,11 +43,13 @@ namespace BusinessLayer.Services
             var userDb = _usersRepository.GetUserByEmail(email);
             return ToModel(userDb);
         }
+        public bool ExistsByEmail(string email)
+        {
+            return _usersRepository.ExistsByEmail(email);
+        }
         private static UserModel ToModel(User user)
         {
             return new UserModel(user);
         }
-
-
     }
 }

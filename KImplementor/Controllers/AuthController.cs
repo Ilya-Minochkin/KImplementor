@@ -26,12 +26,12 @@ namespace KImplementor.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login(string username, string password)
+        public IActionResult Login(LoginRequest request)
         {
             try
             {
-                var identity = _authService.GetIdentity(username, password);
-                var response = new LoginResponse(_authService.GetToken(identity), username);
+                var identity = _authService.GetIdentity(request.Email, request.Password);
+                var response = new LoginResponse(_authService.GetToken(identity), request.Email);
 
                 return Json(response);
             }
@@ -48,13 +48,12 @@ namespace KImplementor.Controllers
         [HttpPost("signup")]
         public IActionResult SignUp(UserModel userModel)
         {
-            if (_userService.GetUserModelByEmail(userModel.User.Email).User != null)
+            if (_userService.ExistsByEmail(userModel.User.Email))
             {
                 return BadRequest(new { errorText = "This user is already exists" });
             }
 
             _userService.SaveUserModel(userModel);
-
             return Ok();
         }
 

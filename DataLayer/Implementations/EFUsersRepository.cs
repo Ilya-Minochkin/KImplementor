@@ -21,6 +21,11 @@ namespace DataLayer.Implementations
             _context.SaveChanges();
         }
 
+        public bool ExistsByEmail(string email)
+        {
+            return _context.Users.FirstOrDefault(user => user.Email == email) != null;
+        }
+
         public IEnumerable<User> GetAllUsers()
         {
             return _context.Users;

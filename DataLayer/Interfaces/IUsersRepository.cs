@@ -13,5 +13,6 @@ namespace DataLayer.Interfaces
         public IEnumerable<User> GetAllUsers();
         public Task<IEnumerable<User>> GetAllUsersAsync();
         public void DeleteUser(User user);
+        public bool ExistsByEmail(string email);
     }
 }

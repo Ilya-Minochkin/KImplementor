@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Models;
 using BusinessLayer.Utils;
 using DataLayer;
 using DataLayer.Entities;
@@ -19,6 +20,7 @@ namespace KImplementorTests.MainTests
         private string password;
         private Mock<IUsersRepository> mock;
         private User testUser;
+        private UserModel testUserModel;
         private AuthController controller;
         private Hasher hasher;
 
@@ -84,6 +86,12 @@ namespace KImplementorTests.MainTests
             Assert.IsInstanceOf(typeof(LoginResponse), loginResponse);
         }
 
+        [Test]
+        public void SignUpUserAlreadyExistsTest()
+        {
+            Assert.IsInstanceOf(typeof(BadRequestObjectResult), controller.SignUp(testUserModel));
+        }
+
         private void InitData()
         {
             email = "Test@test.com";
@@ -102,7 +110,10 @@ namespace KImplementorTests.MainTests
                 Roles = new List<Role>() { new Role { Id = 1, Name = Roles.Admin, Users = null } }
             };
 
+            testUserModel = new UserModel(testUser);
+
             mock.Setup(x => x.GetUserByEmail(email)).Returns(testUser);
+            mock.Setup(x => x.ExistsByEmail(email)).Returns(true);
             var dataManager = new DataManager(usersRepository: mock.Object);
 
             controller = new AuthController(new ServiceManager(dataManager));

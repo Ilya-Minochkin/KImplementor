@@ -1,4 +1,5 @@
 ﻿using DataLayer.Entities;
+using DataLayer.Exceptions;
 using DataLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -55,7 +56,11 @@ namespace DataLayer.Implementations
 
         public async Task<Organization> GetOrganizationByIdAsync(long organizationId)
         {
-            return await _context.Organizations.FindAsync(organizationId);
+            var result = await _context.Organizations.FindAsync(organizationId);
+            if (result == null)
+                throw new OrganizationNotFoundException($"Organization with id = {organizationId} is not found!");
+
+            return result;
         }
     }
 }
