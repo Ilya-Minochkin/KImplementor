@@ -37,6 +37,7 @@ namespace KImplementor.Controllers
                 return BadRequest(new { errorText = ex.Message });
             }
         }
+        [HttpPost]
         public ActionResult<OrganizationModel> Save(OrganizationModel model)
         {
             _organizationService.SaveOrganizationModel(model);

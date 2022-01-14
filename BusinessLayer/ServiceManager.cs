@@ -9,6 +9,7 @@ namespace BusinessLayer
         public OrganizationService OrganizationService { get; }
         public UserService UserService { get; }
         public AuthService AuthService { get; }
+        public BillService BillService { get; }
 
 
         public ServiceManager(DataManager dataManager)
@@ -17,6 +18,7 @@ namespace BusinessLayer
             OrganizationService = new OrganizationService(_dataManager);
             UserService = new UserService(_dataManager);
             AuthService = new AuthService(_dataManager, UserService);
+            BillService = new BillService(_dataManager);
         }
     }
 }

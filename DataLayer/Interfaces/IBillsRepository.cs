@@ -7,6 +7,7 @@ namespace DataLayer.Interfaces
     {
         IEnumerable<Bill> GetAllBills();
         Bill GetBillById(long billId);
+        IEnumerable<Bill> GetAllBillsForUser(User user);
         void SaveBill(Bill bill);
         void DeleteBill(Bill bill);
     }

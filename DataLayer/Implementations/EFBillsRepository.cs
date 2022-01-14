@@ -1,4 +1,5 @@
 ﻿using DataLayer.Entities;
+using DataLayer.Exceptions;
 using DataLayer.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,17 @@ namespace DataLayer.Implementations
             return _context.Bills.ToList();
         }
 
+        public IEnumerable<Bill> GetAllBillsForUser(User user)
+        {
+            return _context.Bills.Where(bill => bill.Owner.Id == user.Id);
+        }
+
         public Bill GetBillById(long billId)
         {
-            return _context.Bills.Find(billId);
+            var result = _context.Bills.FirstOrDefault(b => b.Id == billId);
+            if (result == null)
+                throw new BillNotFoundException($"Bill with id {billId} not found");
+            return result;
         }
 
         public void SaveBill(Bill bill)
